@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{registreeri.visiidile}">registreeri.visiidile</title>
+    <th:block th:include="layout/header"></th:block>
+</head>
+<body>
+
+<div class="container">
+    <h2 th:text="#{registreeri.visiidile}"/>
+    <div>
+        <form class="form-horizontal" action="#"
+              th:action="@{/}"
+              th:object="${dentistVisitDTO}" method="post">
+
+            <!-- id -->
+            <input hidden="true" type="text" th:value="${id}" th:field="*{id}"/>
+
+            <!-- dentist name -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label" th:text="#{arsti.nimi}">arsti.nimi</label>
+                <div class="col-sm-3">
+                    <select class="form-control"  th:field="*{dentistName}">
+                        <option th:each="d : ${dentists}"
+                                th:value="${d}"
+                                th:selected="*{dentistName}"
+                                th:text="${d}">Arsti nimi</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- date and time -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label" th:text="#{visiidi.kuupaev}">visiidi.kuupaev</label>
+                <div class="col-sm-3">
+                    <input type="datetime-local" class="form-control"
+                           th:value="*{visitTime}"
+                           th:field="*{visitTime}"
+                           th:datetime-local="*{visitTime}"/>
+                </div>
+                <!-- date and time errors -->
+                <div class="col-sm-3">
+                    <div th:if="${#fields.hasErrors('visitTime')}"
+                         th:errors="*{visitTime}" class="alert alert-danger" role="alert">viga</div>
+                </div>
+            </div>
+
+            <!-- submit button -->
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-outline-primary" th:text="#{registreeri.visiidile}">registreeri.visiidile</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
