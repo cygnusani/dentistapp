@@ -1,5 +1,7 @@
 package com.cgi.dentistapp.dao.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "dentist_visit")
@@ -17,13 +20,15 @@ public class DentistVisitEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
     @Column(name = "dentist_name")
     private String dentistName;
 
+    @NotNull
     @Column(name = "visit_time")
     private Date visitTime;
 
-    public DentistVisitEntity() { }
+    public DentistVisitEntity() {}
 
     public DentistVisitEntity(Long id, String dentistName, Date visitTime) {
         this.setId(id);

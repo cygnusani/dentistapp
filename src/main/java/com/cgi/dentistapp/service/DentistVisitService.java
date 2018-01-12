@@ -1,5 +1,7 @@
 package com.cgi.dentistapp.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class DentistVisitService {
         return dentistVisitDao.getAllDentists();
     }
 
+    public List<String> findAllTimes() {return dentistVisitDao.getAllTimes();}
+
     public List<DentistVisitEntity> findAll() {
         return dentistVisitDao.getAllVisits();
     }
@@ -40,5 +44,22 @@ public class DentistVisitService {
 
     public void delete(Long id) {
         dentistVisitDao.delete(id);
+    }
+
+    public boolean visitTimeInPast(Date date) {
+        return date.before(new Date()) && new Date().getDay() != date.getDay();
+    }
+
+    public boolean visitTimeAvailable(String dentistName, Date date) {
+        // visit time is not available
+        return dentistVisitDao.getVisitByDateAndTime(new DentistVisitEntity(null, dentistName, date)) == null;
+    }
+
+    public Date formatDate(Date visitDate, String visitTime) {
+        String[] vals = visitTime.split(":");
+        Date temp = visitDate;
+        temp.setHours(Integer.parseInt(vals[0]));
+        temp.setMinutes(Integer.parseInt(vals[1]));
+        return temp;
     }
 }

@@ -32,7 +32,22 @@ public class DentistVisitDao {
         return Arrays.asList(
                 "Jane Doe",
                 "John Doe",
-                "Keegi Veel"
+                "Keegi Veel",
+                "Keegi Kolmas",
+                "Martin Luik"
+        );
+    }
+
+    public List<String> getAllTimes() {
+        return Arrays.asList(
+                "08:00",
+                "08:30",
+                "09:00",
+                "09:30",
+                "10:00",
+                "10:30",
+                "11:00",
+                "11:30"
         );
     }
 
@@ -54,6 +69,19 @@ public class DentistVisitDao {
             }
         }
         return result;
+    }
+
+    public DentistVisitEntity getVisitByDateAndTime(DentistVisitEntity visit) {
+        TypedQuery<DentistVisitEntity> query = em.createQuery("SELECT e FROM DentistVisitEntity e", DentistVisitEntity.class);
+        for (DentistVisitEntity e : query.getResultList()) {
+            if (e.getDentistName().equals(visit.getDentistName())) {
+                if(e.getVisitTime().getTime()==visit.getVisitTime().getTime()){
+                        //&& e.getTime().equals(visit.getTime())) {
+                    return e;
+                }
+            }
+        }
+        return null;
     }
 
     public void delete(Long id) {

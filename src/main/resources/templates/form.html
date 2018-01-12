@@ -7,39 +7,68 @@
 <body>
 
 <div class="container">
-    <h2 th:text="#{registreeri.visiidile}"/>
+    <div>
+        <h2 th:text="#{registreeri.visiidile}"/>
+    </div>
     <div>
         <form class="form-horizontal" action="#"
               th:action="@{/}"
               th:object="${dentistVisitDTO}" method="post">
 
-            <!-- id -->
-            <input hidden="true" type="text" th:value="${id}" th:field="*{id}"/>
+            <input hidden="true" type="text" th:value="*{id}" th:field="*{id}"/>
 
             <!-- dentist name -->
             <div class="form-group">
-                <label class="col-sm-2 control-label" th:text="#{arsti.nimi}">arsti.nimi</label>
-                <div class="col-sm-3">
-                    <select class="form-control"  th:field="*{dentistName}">
+                <label for="dentistName" th:text="#{arsti.nimi}">arsti.nimi</label>
+                <div class="col-md-4">
+                    <select id="dentistName" class="form-control"  th:field="*{dentistName}">
                         <option th:each="d : ${dentists}"
                                 th:value="${d}"
                                 th:selected="*{dentistName}"
-                                th:text="${d}">Arsti nimi</option>
+                                th:text="${d}">arsti.nimi</option>
                     </select>
                 </div>
             </div>
 
-            <!-- date and time -->
+            <!-- visit date -->
             <div class="form-group">
                 <label class="col-sm-2 control-label" th:text="#{visiidi.kuupaev}">visiidi.kuupaev</label>
-                <div class="col-sm-3">
+                <div class="col-md-4">
+                    <input type="date" class="form-control"
+                           th:value="*{visitTime}"
+                           th:field="*{visitTime}"
+                           th:date="*{visitTime}"/>
+                </div>
+            </div>
+
+            <!-- visit time -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label" th:text="#{visiidi.kellaaeg}">visiidi.kellaaeg</label>
+                <div class="col-sm-4">
+                    <select class="form-control"  th:field="*{time}">
+                        <option th:each="t : ${times}"
+                                th:value="${t}"
+                                th:selected="*{time}"
+                                th:text="${t}">kellaaeg</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- date and time
+            <div class="form-group">
+                <label class="col-sm-2 control-label" th:text="#{visiidi.kuupaev}">visiidi.kuupaev</label>
+                <div class="col-sm-4">
                     <input type="datetime-local" class="form-control"
                            th:value="*{visitTime}"
                            th:field="*{visitTime}"
                            th:datetime-local="*{visitTime}"/>
                 </div>
-                <!-- date and time errors -->
-                <div class="col-sm-3">
+            </div>-->
+
+            <!-- date and time errors -->
+            <div class="form-group">
+                <div class="col-sm-2"/>
+                <div class="col-sm-4">
                     <div th:if="${#fields.hasErrors('visitTime')}"
                          th:errors="*{visitTime}" class="alert alert-danger" role="alert">viga</div>
                 </div>
