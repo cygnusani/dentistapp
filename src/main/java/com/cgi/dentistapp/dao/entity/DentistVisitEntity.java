@@ -18,6 +18,7 @@ public class DentistVisitEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="dentist_visit_id")
     private Long id;
 
     @NotNull
@@ -26,6 +27,7 @@ public class DentistVisitEntity {
 
     @NotNull
     @Column(name = "visit_time")
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date visitTime;
 
     public DentistVisitEntity() {}

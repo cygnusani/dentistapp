@@ -2,7 +2,6 @@ package com.cgi.dentistapp.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -19,20 +18,13 @@ public class DentistVisitDTO {
     String dentistName;
 
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd") //yyyy-MM-dd'T'HH:mm //"dd.MM.yyyy"
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date visitTime;
 
     @NotNull
     String time;
 
     public DentistVisitDTO() { }
-
-    public DentistVisitDTO(Long id, String dentistName, Date visitTime, String time) {
-        this.id = id;
-        this.dentistName = dentistName;
-        this.visitTime = visitTime;
-        this.time = time;
-    }
 
     public Long getId() {
         return this.id;

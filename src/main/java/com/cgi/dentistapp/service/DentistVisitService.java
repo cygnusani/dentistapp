@@ -46,13 +46,9 @@ public class DentistVisitService {
         dentistVisitDao.delete(id);
     }
 
-    public boolean visitTimeInPast(Date date) {
-        return date.before(new Date()) && new Date().getDay() != date.getDay();
-    }
-
-    public boolean visitTimeAvailable(String dentistName, Date date) {
+    public boolean visitTimeAvailable(Long id, String dentistName, Date date) {
         // visit time is not available
-        return dentistVisitDao.getVisitByDateAndTime(new DentistVisitEntity(null, dentistName, date)) == null;
+        return dentistVisitDao.getVisitByDateAndTime(new DentistVisitEntity(id, dentistName, date)) == null;
     }
 
     public Date formatDate(Date visitDate, String visitTime) {
@@ -61,5 +57,10 @@ public class DentistVisitService {
         temp.setHours(Integer.parseInt(vals[0]));
         temp.setMinutes(Integer.parseInt(vals[1]));
         return temp;
+    }
+
+    public String formatTime(Date date) {
+        SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
+        return localDateFormat.format(date);
     }
 }

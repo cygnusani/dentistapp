@@ -1,13 +1,12 @@
-.navbar-default {
-    background: #6db33f;
+.div {
+    margin-top: 10px;
+    !important;
 }
 
-.navbar-default .navbar-brand {
-    color: white;
-}
-
-.navbar-default .navbar-nav > li > a {
-    color: white;
+#search_box, #form_title, #index_jumbo, h2 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    !important;
 }
 
 .btn-outline-*

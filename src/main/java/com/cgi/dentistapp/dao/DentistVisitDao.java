@@ -74,11 +74,10 @@ public class DentistVisitDao {
     public DentistVisitEntity getVisitByDateAndTime(DentistVisitEntity visit) {
         TypedQuery<DentistVisitEntity> query = em.createQuery("SELECT e FROM DentistVisitEntity e", DentistVisitEntity.class);
         for (DentistVisitEntity e : query.getResultList()) {
-            if (e.getDentistName().equals(visit.getDentistName())) {
-                if(e.getVisitTime().getTime()==visit.getVisitTime().getTime()){
-                        //&& e.getTime().equals(visit.getTime())) {
-                    return e;
-                }
+            if (e.getDentistName().equals(visit.getDentistName()) &&
+                    e.getVisitTime().getTime() == visit.getVisitTime().getTime() &&
+                    !e.getId().equals(visit.getId())) {
+                return e;
             }
         }
         return null;
