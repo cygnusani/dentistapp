@@ -19,7 +19,6 @@ public class DentistVisitDao {
     @PersistenceContext
     private EntityManager em;
 
-
     public void create(DentistVisitEntity visit) {
         if (visit.getId() == null) {
             em.persist(visit);

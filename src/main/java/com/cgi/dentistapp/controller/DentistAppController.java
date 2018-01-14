@@ -55,8 +55,7 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
             hasErrors = true;
         }
         // check if the date is available
-        if (!dentistVisitService.visitTimeAvailable(dentistVisitDTO.getId(), dentistVisitDTO.getDentistName(), temp)) { //dentistVisitDTO.getVisitTime(), dentistVisitDTO.getTime()
-            // https://stackoverflow.com/questions/12107503/adding-error-message-to-spring-3-databinder-for-custom-object-fields
+        if (!dentistVisitService.visitTimeAvailable(dentistVisitDTO.getId(), dentistVisitDTO.getDentistName(), temp)) {
             // create error message
             bindingResult.rejectValue("visitTime", "error.visitTime.taken");
             hasErrors = true;
